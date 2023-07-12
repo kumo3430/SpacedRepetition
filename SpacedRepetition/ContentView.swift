@@ -23,12 +23,12 @@ class TaskStore: ObservableObject {
     func tasksForDate(_ date: Date) -> [Task] {
         return tasks.filter { Calendar.current.isDate($0.nextReviewDate, inSameDayAs: date) }
     }
-
+    
 }
 
 struct ContentView: View {
     @ObservedObject var taskStore = TaskStore()
-
+    
     var body: some View {
         NavigationView {
             List($taskStore.tasks) { $task in
@@ -46,13 +46,13 @@ struct ContentView: View {
             .listStyle(PlainListStyle())
             .navigationBarTitle("間隔重複")
             .navigationBarItems(trailing:
-                NavigationLink(destination: AddTaskView(taskStore: taskStore)) {
-                    Image(systemName: "plus")
-                }
+                                    NavigationLink(destination: AddTaskView(taskStore: taskStore)) {
+                Image(systemName: "plus")
+            }
             )
         }
     }
-
+    
     func formattedDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
@@ -60,15 +60,17 @@ struct ContentView: View {
     }
 }
 
+// 右上角 新增的button
 struct AddTaskView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var taskStore: TaskStore
     @State var title = ""
     @State var description = ""
     @State var nextReviewDate = Date()
-
+    
     var body: some View {
         Form {
+            // 此部分為欄位上面小小的字
             Section(header: Text("標題").textCase(nil)) {
                 TextField("輸入標題", text: $title)
             }
@@ -79,15 +81,24 @@ struct AddTaskView: View {
                 DatePicker("選擇時間", selection: $nextReviewDate, displayedComponents: [.date, .hourAndMinute])
             }
         }
+        // 一個隱藏的分隔線
         .listStyle(PlainListStyle())
         .navigationBarTitle("新增任務")
+        // ！！！！！
+        // 我需要把上面的那些欄位透過這個按鈕寫進資料庫裡面
         .navigationBarItems(
             trailing: Button("完成") {
+                // 建立一個 Task 物件，傳入使用者輸入的 title、description 和 nextReviewDate。
                 let task = Task(title: title, description: description, nextReviewDate: nextReviewDate)
-                taskStore.tasks.append(task as! Task)
+                // 將新建立的 task 加入到 taskStore 的 tasks 陣列中。
+                // 這行程式碼試圖將 task 強制轉換為 Task 類型，然後再將其添加到 taskStore.tasks 陣列中。然而，由於 task 已經是 Task 類型，所以這個強制轉換是多餘的，並不會產生任何效果。
+//                taskStore.tasks.append(task as! Task)
+                taskStore.tasks.append(task )
+                // ????
                 presentationMode.wrappedValue.dismiss()
             }
-            .disabled(title.isEmpty)
+                // 如果 title 為空，按鈕會被禁用，即無法點擊。
+                .disabled(title.isEmpty)
         )
     }
 }
@@ -96,12 +107,12 @@ struct TaskDetailView: View {
     @State var task: Task
     @State var isReviewChecked: [Bool] = Array(repeating: false, count: 4)
     
-
+    
     var nextReviewDates: [Date] {
         let intervals = [1, 3, 7, 14]
         return intervals.map { Calendar.current.date(byAdding: .day, value: $0, to: task.nextReviewDate)! }
     }
-
+    
     var body: some View {
         Form {
             Section(header: Text("標題")) {
@@ -110,12 +121,12 @@ struct TaskDetailView: View {
             Section(header: Text("內容")) {
                 TextField("輸入內容", text: $task.description)
             }
-
+            
             Section(header: Text("開始時間")) {
                 DatePicker("", selection: $task.nextReviewDate, displayedComponents: [.date, .hourAndMinute])
                     .disabled(true)
             }
-
+            
             Section(header: Text("下一次間隔重複")) {
                 ForEach(0..<4) { index in
                     HStack {
@@ -131,18 +142,18 @@ struct TaskDetailView: View {
             trailing: Button("完成", action: handleCompletion)
         )
     }
-
+    
     func formattedDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         return formatter.string(from: date)
     }
-
+    
     func formattedInterval(_ index: Int) -> Int {
         let intervals = [1, 3, 7, 14]
         return intervals[index]
     }
-
+    
     func handleCompletion() {
         // Handle the completion action here
     }
