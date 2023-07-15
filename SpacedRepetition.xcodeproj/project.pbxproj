@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13BB15CE2A6272EA00F15C05 /* loginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB15CD2A6272EA00F15C05 /* loginView.swift */; };
 		3B2FCC6A2A07937E00AFA3C7 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2FCC692A07937E00AFA3C7 /* CalendarView.swift */; };
 		3B2FCC6C2A07941500AFA3C7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2FCC6B2A07941500AFA3C7 /* MainView.swift */; };
 		3B7EF18029FF6752003876C1 /* SpacedRepetitionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7EF17F29FF6752003876C1 /* SpacedRepetitionApp.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		13BB15CD2A6272EA00F15C05 /* loginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginView.swift; sourceTree = "<group>"; };
 		3B2FCC692A07937E00AFA3C7 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		3B2FCC6B2A07941500AFA3C7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3B7EF17C29FF6752003876C1 /* SpacedRepetition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacedRepetition.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +104,7 @@
 				3B7EF17F29FF6752003876C1 /* SpacedRepetitionApp.swift */,
 				3B2FCC6B2A07941500AFA3C7 /* MainView.swift */,
 				3B7EF18129FF6752003876C1 /* ContentView.swift */,
+				13BB15CD2A6272EA00F15C05 /* loginView.swift */,
 				3B2FCC692A07937E00AFA3C7 /* CalendarView.swift */,
 				3B7EF18329FF6753003876C1 /* Assets.xcassets */,
 				3B7EF18529FF6753003876C1 /* SpacedRepetition.entitlements */,
@@ -267,6 +270,7 @@
 			files = (
 				3B7EF18229FF6752003876C1 /* ContentView.swift in Sources */,
 				3B2FCC6C2A07941500AFA3C7 /* MainView.swift in Sources */,
+				13BB15CE2A6272EA00F15C05 /* loginView.swift in Sources */,
 				3B7EF18029FF6752003876C1 /* SpacedRepetitionApp.swift in Sources */,
 				3B2FCC6A2A07937E00AFA3C7 /* CalendarView.swift in Sources */,
 			);

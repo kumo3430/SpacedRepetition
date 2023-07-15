@@ -11,7 +11,8 @@ import SwiftUI
 struct SpacedRepetitionApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+//            MainView()
+            loginView()
         }
     }
 }
