@@ -22,7 +22,6 @@ struct loginView: View {
                 }
                 .pickerStyle(.segmented)
                 if(selectedIndex == 0){
-                    //                    Text("0")
                     login()
                 } else {
                     SignUp()
@@ -39,7 +38,6 @@ struct loginView_Previews: PreviewProvider {
         loginView()
     }
 }
-
 
 struct login: View {
     @State private var userName = ""
@@ -67,15 +65,11 @@ struct login: View {
                         Text("密碼：")
                         TextField("password",text: $password)
                     }
-                    
                     Button {
                         login()
                     } label: {
                         Text("登入")
                     }
-                    //                    Text(errorEmpty)
-                    //                        .foregroundColor(.red)
-                    // 帳號密碼在資料庫吳資料時
                     Text(errorMessage)
                         .foregroundColor(.red)
                 }
@@ -158,7 +152,6 @@ struct login: View {
 
 struct SignUp: View {
     
-    //    @State private var email = "3430coco@gmail.com"
     @State  var email = ""
     @State private var password = ""
     @State private var verify = 0
@@ -180,10 +173,6 @@ struct SignUp: View {
                 NavigationLink {
                     verifyRegister(verify: $verify,email: $email)
                         .onAppear() {
-                            //                            Task {
-                            //                                await random()
-                            //                                await sendMail()
-                            //                            }
                             mix()
                         }
                 } label: {
@@ -192,23 +181,21 @@ struct SignUp: View {
                 
             }
             .navigationTitle("註冊")
-            //            .padding()
+        }
+    }
+    public func mix() {
+        DispatchQueue.global().async {
+            Random()
+            sendMail()
         }
     }
     
-    public func mix() {
-        //        Task {
-        //            await Random()
-        //            await sendMail()
-        //        }
-    }
-    
-    private func Random() async {
+    private func Random() {
         self.verify = Int.random(in: 1..<99999999)
         print("隨機變數為：\(self.verify)")
     }
     
-    public func sendMail() async {
+    public func sendMail() {
         
         let smtp = SMTP(
             hostname: "smtp.gmail.com",     // SMTP server address
@@ -232,17 +219,12 @@ struct SignUp: View {
             if let error = error {
                 print(error)
             } else {
+                print("---------------------------------")
+                print("Send email successful")
                 print("SEND: SUBJECT: \(mail.subject)")
                 print("SEND: SUBJECT: \(mail.text)")
-                //                           print("MESSAGE-ID: \(mail.messageID)")
                 print("FROM: \(mail.from)")
                 print("TO: \(mail.to)")
-                //                           print("DATE: \(mail.date)")
-                //                           print("MIME-VERSION: \(mail.mimeVersion)")
-                //                           print("SEND: \(mail.content.contentType ?? "")")
-                //                           print("CONTENT-TRANSFER-ENCODING: \(mail.content.transferEncoding ?? "")")
-                //                           print("CONTENT-DISPOSITION: \(mail.content.disposition ?? "")")
-                print("Send email successful")
                 print("---------------------------------")
             }
         }
