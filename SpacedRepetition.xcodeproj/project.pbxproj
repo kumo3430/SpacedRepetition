@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		139B74C62A68EE5600BAEE15 /* SwiftSMTP in Frameworks */ = {isa = PBXBuildFile; productRef = 139B74C52A68EE5600BAEE15 /* SwiftSMTP */; };
+		139B74C82A68EE7700BAEE15 /* verifyRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139B74C72A68EE7700BAEE15 /* verifyRegister.swift */; };
 		13BB15CE2A6272EA00F15C05 /* loginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB15CD2A6272EA00F15C05 /* loginView.swift */; };
 		3B2FCC6A2A07937E00AFA3C7 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2FCC692A07937E00AFA3C7 /* CalendarView.swift */; };
 		3B2FCC6C2A07941500AFA3C7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2FCC6B2A07941500AFA3C7 /* MainView.swift */; };
@@ -37,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		139B74C72A68EE7700BAEE15 /* verifyRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = verifyRegister.swift; sourceTree = "<group>"; };
 		13BB15CD2A6272EA00F15C05 /* loginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginView.swift; sourceTree = "<group>"; };
 		3B2FCC692A07937E00AFA3C7 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		3B2FCC6B2A07941500AFA3C7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -58,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				139B74C62A68EE5600BAEE15 /* SwiftSMTP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +109,7 @@
 				3B2FCC6B2A07941500AFA3C7 /* MainView.swift */,
 				3B7EF18129FF6752003876C1 /* ContentView.swift */,
 				13BB15CD2A6272EA00F15C05 /* loginView.swift */,
+				139B74C72A68EE7700BAEE15 /* verifyRegister.swift */,
 				3B2FCC692A07937E00AFA3C7 /* CalendarView.swift */,
 				3B7EF18329FF6753003876C1 /* Assets.xcassets */,
 				3B7EF18529FF6753003876C1 /* SpacedRepetition.entitlements */,
@@ -154,6 +159,9 @@
 			dependencies = (
 			);
 			name = SpacedRepetition;
+			packageProductDependencies = (
+				139B74C52A68EE5600BAEE15 /* SwiftSMTP */,
+			);
 			productName = SpacedRepetition;
 			productReference = 3B7EF17C29FF6752003876C1 /* SpacedRepetition.app */;
 			productType = "com.apple.product-type.application";
@@ -202,7 +210,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					3B7EF17B29FF6752003876C1 = {
 						CreatedOnToolsVersion = 14.2;
@@ -226,6 +234,9 @@
 				Base,
 			);
 			mainGroup = 3B7EF17329FF6752003876C1;
+			packageReferences = (
+				139B74C42A68EE5600BAEE15 /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
+			);
 			productRefGroup = 3B7EF17D29FF6752003876C1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -269,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B7EF18229FF6752003876C1 /* ContentView.swift in Sources */,
+				139B74C82A68EE7700BAEE15 /* verifyRegister.swift in Sources */,
 				3B2FCC6C2A07941500AFA3C7 /* MainView.swift in Sources */,
 				13BB15CE2A6272EA00F15C05 /* loginView.swift in Sources */,
 				3B7EF18029FF6752003876C1 /* SpacedRepetitionApp.swift in Sources */,
@@ -342,6 +354,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -400,6 +413,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -426,6 +440,7 @@
 				CODE_SIGN_ENTITLEMENTS = SpacedRepetition/SpacedRepetition.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"SpacedRepetition/Preview Content\"";
 				DEVELOPMENT_TEAM = MX3FJA9996;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -464,6 +479,7 @@
 				CODE_SIGN_ENTITLEMENTS = SpacedRepetition/SpacedRepetition.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"SpacedRepetition/Preview Content\"";
 				DEVELOPMENT_TEAM = MX3FJA9996;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -501,6 +517,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MX3FJA9996;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -524,6 +541,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MX3FJA9996;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -546,6 +564,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MX3FJA9996;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -568,6 +587,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MX3FJA9996;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -624,6 +644,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		139B74C42A68EE5600BAEE15 /* XCRemoteSwiftPackageReference "Swift-SMTP" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Kitura/Swift-SMTP";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		139B74C52A68EE5600BAEE15 /* SwiftSMTP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 139B74C42A68EE5600BAEE15 /* XCRemoteSwiftPackageReference "Swift-SMTP" */;
+			productName = SwiftSMTP;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3B7EF17429FF6752003876C1 /* Project object */;
 }

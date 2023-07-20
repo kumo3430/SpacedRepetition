@@ -6,8 +6,42 @@
 //
 
 import SwiftUI
-
+import SwiftSMTP
 struct loginView: View {
+    let roles = ["Login", "SignUp"]
+    @State private var selectedIndex = 0
+    var body: some View {
+        NavigationView {
+            VStack {
+                Picker(selection: $selectedIndex) {
+                    ForEach(Array(roles.enumerated()), id: \.offset) { index, role in
+                        Text(role)
+                    }
+                } label: {
+                    Text("選擇角色")
+                }
+                .pickerStyle(.segmented)
+                if(selectedIndex == 0){
+                    //                    Text("0")
+                    login()
+                } else {
+                    SignUp()
+                }
+            }
+        }
+        .navigationTitle("登入畫面")
+    }
+}
+
+
+struct loginView_Previews: PreviewProvider {
+    static var previews: some View {
+        loginView()
+    }
+}
+
+
+struct login: View {
     @State private var userName = ""
     @State private var password = ""
     @State private var errorEmpty = ""
@@ -20,7 +54,7 @@ struct loginView: View {
         var userName: String
         var message: String
     }
-
+    
     var body: some View {
         NavigationView {
             if (!isLoggedIn) {
@@ -33,6 +67,7 @@ struct loginView: View {
                         Text("密碼：")
                         TextField("password",text: $password)
                     }
+                    
                     Button {
                         login()
                     } label: {
@@ -74,7 +109,7 @@ struct loginView: View {
         errorMessage = ""
         let url = URL(string: "http://127.0.0.1:8888/account/login.php")!
         var request = URLRequest(url: url)
-//        request.cachePolicy = .reloadIgnoringLocalCacheData
+        //        request.cachePolicy = .reloadIgnoringLocalCacheData
         request.httpMethod = "POST"
         let body = ["userName": userName, "password": password]
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
@@ -102,27 +137,114 @@ struct loginView: View {
                         print("使用者名稱為：\(userData.userName)")
                         print("============== loginView ==============")
                         isLoggedIn = true
-
+                        
                     }
                 } catch {
                     print("解碼失敗：\(error)")
                 }
             }
             // 測試
-//            guard let data = data else {
-//                print("No data returned from server.")
-//                return
-//            }
-//            if let content = String(data: data, encoding: .utf8) {
-//                print(content)
-//            }
+            //            guard let data = data else {
+            //                print("No data returned from server.")
+            //                return
+            //            }
+            //            if let content = String(data: data, encoding: .utf8) {
+            //                print(content)
+            //            }
         }
         .resume()
     }
 }
 
-struct loginView_Previews: PreviewProvider {
-    static var previews: some View {
-        loginView()
+struct SignUp: View {
+    
+    //    @State private var email = "3430coco@gmail.com"
+    @State  var email = ""
+    @State private var password = ""
+    @State private var verify = 0
+    var body: some View {
+        NavigationView {
+            VStack {
+                HStack {
+                    Text("你的帳號：")
+                    TextField("email", text: $email)
+                        .textFieldStyle(.roundedBorder)
+                        .padding()
+                }
+                HStack {
+                    Text("你的密碼：")
+                    TextField("password", text: $password)
+                        .textFieldStyle(.roundedBorder)
+                        .padding()
+                }
+                NavigationLink {
+                    verifyRegister(verify: $verify,email: $email)
+                        .onAppear() {
+                            //                            Task {
+                            //                                await random()
+                            //                                await sendMail()
+                            //                            }
+                            mix()
+                        }
+                } label: {
+                    Text("註冊")
+                }
+                
+            }
+            .navigationTitle("註冊")
+            //            .padding()
+        }
+    }
+    
+    public func mix() {
+        //        Task {
+        //            await Random()
+        //            await sendMail()
+        //        }
+    }
+    
+    private func Random() async {
+        self.verify = Int.random(in: 1..<99999999)
+        print("隨機變數為：\(self.verify)")
+    }
+    
+    public func sendMail() async {
+        
+        let smtp = SMTP(
+            hostname: "smtp.gmail.com",     // SMTP server address
+            email: "3430yun@gmail.com",        // username to login
+            password: "knhipliavnpqxwty"            // password to login
+        )
+        
+        //        let megaman = Mail.User(name: "coco", email: "3430coco@gmail.com")
+        let megaman = Mail.User(name: "coco", email: self.email)
+        let drLight = Mail.User(name: "Yun", email: "3430yun@gmail.com")
+        
+        
+        let mail = Mail(
+            from: drLight,
+            to: [megaman],
+            subject: "歡迎使用我習慣了！這是您的驗證信件",
+            text: "以下是您的驗證碼： \(String(self.verify))"
+        )
+        
+        smtp.send(mail) { (error) in
+            if let error = error {
+                print(error)
+            } else {
+                print("SEND: SUBJECT: \(mail.subject)")
+                print("SEND: SUBJECT: \(mail.text)")
+                //                           print("MESSAGE-ID: \(mail.messageID)")
+                print("FROM: \(mail.from)")
+                print("TO: \(mail.to)")
+                //                           print("DATE: \(mail.date)")
+                //                           print("MIME-VERSION: \(mail.mimeVersion)")
+                //                           print("SEND: \(mail.content.contentType ?? "")")
+                //                           print("CONTENT-TRANSFER-ENCODING: \(mail.content.transferEncoding ?? "")")
+                //                           print("CONTENT-DISPOSITION: \(mail.content.disposition ?? "")")
+                print("Send email successful")
+                print("---------------------------------")
+            }
+        }
     }
 }
