@@ -23,16 +23,15 @@ $conn = new mysqli($servername, $user, $pass, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
+$emailExistSql = "SELECT * FROM `User` WHERE `email` = '$email'";
+$result = $conn->query($emailExistSql);
+if ($result->num_rows > 0) {
+    $emailExist = true;
+}
 $nameExistSql = "SELECT * FROM `User` WHERE `userName` = '$userName'";
 $result = $conn->query($nameExistSql);
 if ($result->num_rows > 0) {
     $nameExist = true;
-}
-$emailExistSql = "SELECT * FROM `User` WHERE `email` = '$email'";
-$result = $conn->query($emailExistSql);
-if ($result->num_rows > 0) {
-    $mailExist = true;
 }
 
 if ($userName == "" && $email == "" && $password == "") {
