@@ -7,9 +7,12 @@ $input_data = file_get_contents("php://input");
 $data = json_decode($input_data, true);
 
 // 取得用戶名和密碼
-$userName = $data['userName'];
+// $userName = $data['userName'];
 $email = $data['email'];
 $password = $data['password'];
+$create_at = $data['create_at'];
+
+$servername = "localhost"; // 資料庫伺服器名稱
 
 $servername = "localhost"; // 資料庫伺服器名稱
 $user = "kumo"; // 資料庫使用者名稱
@@ -28,21 +31,14 @@ $result = $conn->query($emailExistSql);
 if ($result->num_rows > 0) {
     $emailExist = true;
 }
-$nameExistSql = "SELECT * FROM `User` WHERE `userName` = '$userName'";
-$result = $conn->query($nameExistSql);
-if ($result->num_rows > 0) {
-    $nameExist = true;
-}
 
-if ($userName == "" && $email == "" && $password == "") {
-    $message = "not yet filled";
-} else if ($emailExist) {
+if ($emailExist) {
     $message = "email is registered";
 } else if ($nameExist) {
     $message = "name is registered";
 } else {
     if ($userName != "" && $email != "" && $password != "") {
-        $sql = "INSERT INTO User (userName,email, password) VALUES ('$userName','$email', '$password')";
+        $sql = "INSERT INTO User (email, password, create_at) VALUES ('$email', '$password','$create_at')";
         if ($conn->query($sql) === TRUE) {
             // 註冊成功，回傳 JSON 格式的訊息
             $message = "User registered successfully";
@@ -51,7 +47,7 @@ if ($userName == "" && $email == "" && $password == "") {
             $message = 'Error: ' . $sql . '<br>' . $conn->error;
         }
 
-        $sql2 = "SELECT * FROM `User` WHERE `userName` = '$userName'";
+        $sql2 = "SELECT * FROM `User` WHERE `email` = '$email'";
         $result = $conn->query($sql2);
         if ($result->num_rows <= 0) {
             $message = "no such account";
@@ -66,9 +62,9 @@ if ($userName == "" && $email == "" && $password == "") {
 
 $userData = array(
     'userId' => $uid,
-    'userName' => $userName,
     'email' => $email,
     'password' => $password,
+    'create_at' => $create_at,
     'message' => $message
 );
 echo json_encode($userData);
