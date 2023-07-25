@@ -1,5 +1,6 @@
 <?php
 // 獲取用戶提交的表單數據
+session_unset();
 session_destroy();
 session_start();
 $postData = file_get_contents("php://input");

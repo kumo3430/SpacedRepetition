@@ -27,6 +27,7 @@ struct loginView: View {
                     SignUp()
                 }
             }
+//            login()
         }
         .navigationTitle("登入畫面")
     }
@@ -155,6 +156,7 @@ struct SignUp: View {
     @State  var email = ""
     @State private var password = ""
     @State private var verify = 0
+//    @State private var userName = ""
     var body: some View {
         NavigationView {
             VStack {
@@ -164,6 +166,12 @@ struct SignUp: View {
                         .textFieldStyle(.roundedBorder)
                         .padding()
                 }
+//                HStack { // Add the userName TextField
+//                    Text("使用者名稱：")
+//                    TextField("username", text: $userName)
+//                        .textFieldStyle(.roundedBorder)
+//                        .padding()
+//                }
                 HStack {
                     Text("你的密碼：")
                     TextField("password", text: $password)

@@ -14,6 +14,7 @@ struct verifyRegister: View {
     @State private var Verify = ""
     @Binding var verify :Int
     @Binding var email :String
+//    @Binding var userName :String
     @State private var messenge = ""
     // 此處為日後要更改的秒數
     //    @State var timeRemaining = 300
@@ -137,7 +138,9 @@ struct verifyRegister_Previews: PreviewProvider {
     static var previews: some View {
         @State var verify: Int = 00000000
         @State var email: String = "Email"
+//        @State var userName: String = "Name"
         NavigationView {
+//            verifyRegister(verify: $verify,email: $email,userName: $userName)
             verifyRegister(verify: $verify,email: $email)
         }
     }
