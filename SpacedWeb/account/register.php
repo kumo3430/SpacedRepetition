@@ -49,8 +49,6 @@ if ($userName == "" && $email == "" && $password == "") {
         } else {
             // 註冊失敗，回傳 JSON 格式的錯誤訊息
             $message = 'Error: ' . $sql . '<br>' . $conn->error;
-            // $response = array('message' => 'Error: ' . $sql . '<br>' . $conn->error);
-            // echo json_encode($response);
         }
 
         $sql2 = "SELECT * FROM `User` WHERE `userName` = '$userName'";
@@ -61,18 +59,11 @@ if ($userName == "" && $email == "" && $password == "") {
             while ($row = $result->fetch_assoc()) {
                 $_SESSION['uid'] = $row['id'];
                 $uid = $row['id'];
-                // $userData = array(
-                //     'userId' => $uid,
-                //     'userName' => $userName,
-                //     'email' => $email,
-                //     'password' => $password,
-                //     'message' => $message
-                // );
-                // echo json_encode($userData);
             }
         }
     }
 }
+
 $userData = array(
     'userId' => $uid,
     'userName' => $userName,
@@ -81,45 +72,6 @@ $userData = array(
     'message' => $message
 );
 echo json_encode($userData);
-
-// if ($userName == "" && $email == "" && $password == "") {
-//     $message = "not yet filled";
-// } else {
-//     if ($userName != "" && $email != "" && $password != "") {
-//         $sql = "INSERT INTO User (userName,email, password) VALUES ('$userName','$email', '$password')";
-//         if ($conn->query($sql) === TRUE) {
-//             // 註冊成功，回傳 JSON 格式的訊息
-//             $message = "User registered successfully";
-//         } else {
-//             // 註冊失敗，回傳 JSON 格式的錯誤訊息
-//             $message = 'Error: ' . $sql . '<br>' . $conn->error;
-//             // $response = array('message' => 'Error: ' . $sql . '<br>' . $conn->error);
-//             // echo json_encode($response);
-//         }
-
-//         $sql2 = "SELECT * FROM `User` WHERE `userName` = '$userName'";
-//         // $sql2 = "SELECT * FROM `User` WHERE `userName` = '7pp'";
-//         $result = $conn->query($sql2);
-
-//         if ($result->num_rows <= 0) {
-//             $message = "no such account";
-//         } else {
-//             while ($row = $result->fetch_assoc()) {
-//                 $_SESSION['uid'] = $row['id'];
-//                 $uid = $row['id'];
-//                 $userData = array(
-//                     'userId' => $uid,
-//                     'userName' => $userName,
-//                     'email' => $email,
-//                     'password' => $password,
-//                     'message' => $message
-//                 );
-//                 echo json_encode($userData);
-//             }
-
-//         }
-//     }
-// }
 
 $conn->close();
 ?>
