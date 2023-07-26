@@ -6,7 +6,7 @@ session_start();
 $postData = file_get_contents("php://input");
 $requestData = json_decode($postData, true);
 
-$userName = $requestData['userName'];
+$email = $requestData['email'];
 $password = $requestData['password'];
 
 $servername = "localhost"; // 資料庫伺服器名稱
@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 }
 
 
-$sql = "SELECT * FROM User WHERE userName='$userName' AND password='$password'";
+$sql = "SELECT * FROM User WHERE email='$email' AND password='$password'";
 // $sql = "SELECT * FROM User WHERE userName='7pp' AND password='7pp'";
 
 // echo "userName:" . $userName;
@@ -34,13 +34,12 @@ if (mysqli_num_rows($result) > 0) {
     if ($result->num_rows > 0) {
         // 輸出每行數據
         while ($row = $result->fetch_assoc()) {
-            // $uid = $row['id'];
-            // 把當下登入的使用者id 存入seeeion 以便之後可以存取
             $_SESSION['uid'] = $row['id'];
+            $uid = $row['id'];
 
             $userData = array(
-                'id' => $row["id"],
-                'userName' => $row["userName"],
+                'id' => $uid,
+                'email' => $row["email"],
                 'message' => 'User login successfully'
             );
             $jsonData = json_encode($userData);
